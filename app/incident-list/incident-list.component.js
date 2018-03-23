@@ -8,7 +8,8 @@ component('incidentList', {
     controller: ['Incident',
         function IncidentListController(Incident) {
             this.incidents = Incident.query();
-            this.orderProp = 'Caller';
+            this.orderProp = 'opened_at';
+            console.log('test', this);
         }
     ]
 });

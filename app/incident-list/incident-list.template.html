@@ -1,7 +1,8 @@
+<!--
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
-            <!--Sidebar content-->
+            &lt;!&ndash;Sidebar content&ndash;&gt;
 
             <p>
                 Search:
@@ -18,7 +19,7 @@
 
         </div>
         <div class="col-md-10">
-            <!--Body content-->
+            &lt;!&ndash;Body content&ndash;&gt;
 
             <ul class="incidents">
                 <li ng-repeat="incident in $ctrl.incidents | filter:$ctrl.query | orderBy:$ctrl.orderProp"
@@ -29,4 +30,59 @@
 
         </div>
     </div>
+</div>-->
+<div class="row">
+    <table st-table="displayedCollection" st-safe-src="$ctrl.incidents" class="table table-striped">
+        <thead>
+        <tr>
+            <th>
+                <div class="form-group">
+                    <label>Search:</label>
+                    <input type="text" ng-model="$ctrl.query" class="form-control">
+                </div>
+            </th>
+            <th>
+
+            </th>
+            <th>
+                <div class="form-group">
+                    <label>State</label>
+                    <select st-search="state" class="form-control">
+                        <option value="">All</option>
+                        <option value="7">7</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <label>Urgency</label>
+                    <select st-search="urgency" class="form-control">
+                        <option value="">All</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th st-sort="number">Incident Number</th>
+            <th st-sort="urgency">Urgency</th>
+            <th st-sort="caller">Caller</th>
+            <th st-sort="opened_at">Opened</th>
+            <th st-sort="state">State</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr st-select-row="row" ng-repeat="incident in displayedCollection | filter:$ctrl.query">
+            <td>{{incident.number}}</td>
+            <td>{{incident.urgency}}</td>
+            <td>{{incident.caller}}</td>
+            <td>{{incident.opened_at | date}}</td>
+            <td>{{incident.state}}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
