@@ -7,14 +7,8 @@ component('incidentDetail', {
     templateUrl: 'incident-detail/incident-detail.template.html',
     controller: ['$routeParams', 'Incident',
         function IncidentDetailController($routeParams, Incident) {
-            var self = this;
-            self.incident = Incident.get({incidentId: $routeParams.incidentId}, function(incident) {
-                self.setImage(incident.images[0]);
-            });
+        console.log($routeParams.incidentId);
 
-            self.setImage = function setImage(imageUrl) {
-                self.mainImageUrl = imageUrl;
-            };
         }
     ]
 });

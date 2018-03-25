@@ -5,6 +5,7 @@ angular.module('myApp', [
     'ngRoute',
     'core',
     'ui.bootstrap',
+    'chart.js',
     'smart-table',
     'incidentDetail',
     'incidentList'
@@ -17,7 +18,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
     when('/incidents', {
         template: '<incident-list></incident-list>'
     }).
-    when('/incidents/:incidentId', {
+    when('/incident/:incidentId', {
         template: '<incident-detail></incident-detail>'
     }).
     otherwise('/incidents');

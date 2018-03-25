@@ -1,36 +1,24 @@
-<!--
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2">
-            &lt;!&ndash;Sidebar content&ndash;&gt;
-
-            <p>
-                Search:
-                <input ng-model="$ctrl.query" />
-            </p>
-
-            <p>
-                Sort by:
-                <select ng-model="$ctrl.orderProp">
-                    <option value="Caller">Caller</option>
-                    <option value="Incident Number">Incident Number</option>
-                </select>
-            </p>
-
-        </div>
-        <div class="col-md-10">
-            &lt;!&ndash;Body content&ndash;&gt;
-
-            <ul class="incidents">
-                <li ng-repeat="incident in $ctrl.incidents | filter:$ctrl.query | orderBy:$ctrl.orderProp"
-                    class="thumbnail incident-list-item">
-                    <p>{{incident.Caller}}</p>
-                </li>
-            </ul>
-
-        </div>
+<script src="../../../angular-phonecat/app/phone-list/phone-list.component.js"></script>
+<div class="row">
+    <div class="col-md-6">
+        <h3>
+            Incidents by state {{$ctrl.newTest}}
+        </h3>
+        <canvas
+                id="doughnut"
+                class="chart chart-doughnut">
+        </canvas>
     </div>
-</div>-->
+    <div class="col-md-6">
+        <h3>
+            Incidents over time
+        </h3>
+        <canvas id="line" class="chart chart-line" chart-data="$ctrl.dataL"
+                chart-labels="$ctrl.labelsL" chart-series="$ctrl.seriesL" chart-options="$ctrl.optionsL"
+                chart-dataset-override="$ctrl.datasetOverrideL">
+        </canvas
+    </div>
+</div>
 <div class="row">
     <table st-table="displayedCollection" st-safe-src="$ctrl.incidents" class="table table-striped">
         <thead>
@@ -49,9 +37,9 @@
                     <label>State</label>
                     <select st-search="state" class="form-control">
                         <option value="">All</option>
-                        <option value="7">7</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
+                        <option value="7">{{"7" | getState}}</option>
+                        <option value="3">{{"3" | getState}}</option>
+                        <option value="2">{{"2" | getState}}</option>
                     </select>
                 </div>
             </th>
@@ -77,11 +65,11 @@
         </thead>
         <tbody>
         <tr st-select-row="row" ng-repeat="incident in displayedCollection | filter:$ctrl.query">
-            <td>{{incident.number}}</td>
+            <td><a href="#!/incident/{{incident.number}}">{{incident.number}}</a></td>
             <td>{{incident.urgency}}</td>
             <td>{{incident.caller}}</td>
             <td>{{incident.opened_at | date}}</td>
-            <td>{{incident.state}}</td>
+            <td>{{incident.state | getState}}</td>
         </tr>
         </tbody>
     </table>

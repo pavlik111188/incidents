@@ -37,7 +37,7 @@ router.get('/get-incidentList', function ( req, res) {
                 if (error) throw new Error(error);
                 incidents[id].caller = JSON.parse(response.body).result.name;
                 if (t == incidents.length) {
-                    res.send(incidents);
+                    res.send({incidents: incidents, test: 'ror'});
                 }
                 t++;
             });
