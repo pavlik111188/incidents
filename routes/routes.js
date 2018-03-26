@@ -1,6 +1,3 @@
-/**
- * Created by Pavel S on 22.05.17.
- */
 
 const express = require('express');
 const router = express.Router();
@@ -24,6 +21,8 @@ router.get('/get-incidentList', function ( req, res) {
     var limit = params.limit;
     options.url = url;
     options.qs = {sysparm_limit: limit};
+
+    /* send request to the API */
     request(options, function (error, response, body) {
         if (error)
             return res.send(error);
@@ -33,6 +32,8 @@ router.get('/get-incidentList', function ( req, res) {
             var id = index;
             var coller_link = item.caller_id.link;
             options.url = coller_link;
+
+            /* getting user name by link and adding to the json obj */
             request(options, function (error, response, body) {
                 if (error) throw new Error(error);
                 incidents[id].caller = JSON.parse(response.body).result.name;

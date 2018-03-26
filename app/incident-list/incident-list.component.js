@@ -1,6 +1,7 @@
 'use strict';
 var app = angular.module('incidentList', []);
 
+/* My custom filter for the state */
 app.filter('getState', function () {
     return function (item) {
         var result;
@@ -33,6 +34,8 @@ component('incidentList', {
             var newState = 0;
             var data;
             var ctx = document.getElementById("doughnut").getContext('2d');
+
+            /* Getting data for the chart by state */
             Incident.query().$promise.then(function (incidentsRes) {
                 for (var i=0; i<incidentsRes.length; i++) {
 
@@ -55,6 +58,8 @@ component('incidentList', {
             }).then(function (inProgress) {
                 data = [inProgress, onHold, newState];
                 totalCount = inProgress + onHold + newState;
+
+                /* Calling Chart after the getting data */
                 new Chart(ctx, {
                     type: 'doughnut',
                     data: {
@@ -85,7 +90,6 @@ component('incidentList', {
                             display: true,
                             position: 'right',
                             labels: {
-                                // This more specific font property overrides the global property
                                 fontColor: 'black'
                             }
                         },
@@ -102,11 +106,12 @@ component('incidentList', {
                     }
                 })
             });
-            this.stateStatus = function (data) {
-                return 'text';
-            };
+
+            /* getting data for the table */
             this.incidents = Incident.query();
             this.orderProp = 'opened_at';
+
+            /* Random data for the second chart, unfortunately I did not understand what data should to be*/
             this.labelsL = ["January", "February", "March", "April", "May", "June", "July"];
             this.seriesL = ['Series A'];
             this.dataL = [65, 59, 80, 81, 56, 55, 40];
@@ -124,7 +129,6 @@ component('incidentList', {
                 }
             };
 
-            //new
         }
     ]
 });

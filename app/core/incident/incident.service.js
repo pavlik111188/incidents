@@ -1,7 +1,5 @@
 'use strict';
 
-//incidets.json
-//http://localhost:3000/get-incidentList
 angular.
 module('core.incident').
 factory('Incident', ['$resource',
@@ -11,20 +9,6 @@ factory('Incident', ['$resource',
                 method: 'GET',
                 isArray: true
             }
-            /*getById: function (id) {
-                var result = null;
-                angular.forEach(mountains, function (m) {
-                    if (m.id == id) result = m;
-                });
-                return result;
-            },
-            deleteById: function (id) {
-                angular.forEach(mountains, function (m, i) {
-                    if (id == m.id) {
-                        mountains.splice(i, 1);
-                    }
-                });
-            }*/
         });
     }
 ]);
