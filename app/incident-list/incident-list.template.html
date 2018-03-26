@@ -74,3 +74,20 @@
         </tbody>
     </table>
 </div>
+
+<script type="text/ng-template" id="details.html">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>Szczegóły</h3>
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    {{mountain.mountain}}
+                </a>
+                <a href="#" class="list-group-item">Wysokość: <b>{{mountain.metres}}</b></a>
+                <a href="#" class="list-group-item">Państwo: <b>{{mountain.country}}</b></a>
+            </div>
+            <a href="#/mountain" class="btn btn-default">Powrót do listy</a>
+            <a href="" ng-click="delete(mountain.id)" class="btn btn-danger">Usuń {{mountain.mountain}}</a>
+        </div>
+    </div>
+</script>

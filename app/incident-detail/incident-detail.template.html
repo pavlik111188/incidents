@@ -77,5 +77,28 @@
         </dl>
     </li>
 </ul>-->
-
-<p>test</p>
+<div>Incident</div>
+<h1>{{$ctrl.incident.number}}</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Description</h3>
+            <div>{{$ctrl.incident.description}}</div>
+        </div>
+        <div class="col-md-3">
+            <h3>Caller</h3>
+            <div>{{$ctrl.incident.caller}}</div>
+            <h3>Urgency</h3>
+            <div>{{$ctrl.incident.urgency}}</div>
+        </div>
+        <div class="col-md-3">
+            <h3>Opened</h3>
+            <div>{{$ctrl.incident.opened_at | date}}</div>
+            <h3>Stage</h3>
+            <div>{{$ctrl.incident.stage | getState}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <a href="#!/incidents" class="btn btn-danger">Back</a>
+    </div>
+</div>

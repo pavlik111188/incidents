@@ -8,7 +8,7 @@ const request = require("request");
 const forEach = require('async-foreach').forEach;
 const options = { method: 'GET',
     headers:
-        { 'postman-token': '53b1d2a2-a82c-a642-b005-297483701440',
+        { 'postman-token': '2bf6ae23-5d6b-e476-ab46-77ca8a06f126',
             'cache-control': 'no-cache',
             authorization: 'Basic YWRtaW46Z1QyNyhtblMxb2lrZ2dXMV4zbHZiZEs=',
             'content-type': 'application/json;charset=UTF-8',
@@ -18,7 +18,6 @@ const options = { method: 'GET',
         { data: '{\'short_description\':\'Unable to connect to office wifi\',\'assignment_group\':\'287ebd7da9fe198100f92cc8d1d2154e\',\'urgency\':\'2\',\'impact\':\'2\'}',
             user: '\'pavlo111188@gmail.com\':\'gT27(mnS1oikggW1^3lvbdK\'' } };
 
-// test
 router.get('/get-incidentList', function ( req, res) {
     var params = JSON.parse(req.query.params);
     var url = params.url;
@@ -26,7 +25,8 @@ router.get('/get-incidentList', function ( req, res) {
     options.url = url;
     options.qs = {sysparm_limit: limit};
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error)
+            return res.send(error);
         var incidents = JSON.parse(response.body).result;
         var t = 1;
         forEach(incidents, function(item, index, arr) {
@@ -37,27 +37,13 @@ router.get('/get-incidentList', function ( req, res) {
                 if (error) throw new Error(error);
                 incidents[id].caller = JSON.parse(response.body).result.name;
                 if (t == incidents.length) {
-                    res.send({incidents: incidents, test: 'ror'});
+                    res.send(incidents);
                 }
                 t++;
             });
         }, function (err) {
 
         });
-        /*for (var i=0; i < incidents.length; i++) {
-            var inc = {incidents: incidents, id: i};
-            var coller_link = incidents[i].caller_id.link;
-            console.log(incidents[i].caller_id.link);
-            options.url = coller_link;
-            figlet(inc, function (err, data) {
-                request(options, function (error, response, body) {
-                    if (error) throw new Error(error);
-                    // incidents[i].caller = JSON.parse(response.body).result.name;
-                    console.log(inc.id);
-                    console.log('====================');
-                });
-            });
-        }*/
     });
 });
 module.exports = router;

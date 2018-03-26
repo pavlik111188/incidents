@@ -5,10 +5,21 @@ angular.
 module('incidentDetail').
 component('incidentDetail', {
     templateUrl: 'incident-detail/incident-detail.template.html',
-    controller: ['$routeParams', 'Incident',
-        function IncidentDetailController($routeParams, Incident) {
-        console.log($routeParams.incidentId);
+    controller: ['$scope', '$routeParams', '$location', 'Incident',
+        function IncidentDetailController($scope, $routeParams, $location, Incident) {
+        this.incindents = Incident.query();
+            var self = this;
 
+            self.setIncident = function setImage(inc) {
+                self.incident = inc;
+            };
+            this.incindents.$promise.then(function (incidentsRes) {
+                for (var i=0; i<incidentsRes.length; i++) {
+                    if ($routeParams.incidentId === incidentsRes[i].number) {
+                        self.setIncident(incidentsRes[i]);
+                    }
+                }
+            });
         }
     ]
 });

@@ -25,8 +25,8 @@ app.filter('getState', function () {
 app.
 component('incidentList', {
     templateUrl: 'incident-list/incident-list.template.html',
-    controller: ['$scope', '$modal', '$log', 'Incident',
-        function IncidentListController($scope, $modal, $log, Incident) {
+    controller: ['Incident',
+        function IncidentListController(Incident) {
             var totalCount = 0;
             var inProgress = 0;
             var onHold = 0;
