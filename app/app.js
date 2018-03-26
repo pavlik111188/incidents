@@ -4,7 +4,6 @@
 angular.module('myApp', [
     'ngRoute',
     'core',
-    'ui.bootstrap',
     'chart.js',
     'smart-table',
     'incidentDetail',
